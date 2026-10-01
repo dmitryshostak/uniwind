@@ -174,9 +174,10 @@ Native components:
 Web components:
 
 - Web wrappers import from `react-native` as resolved by bundler aliases.
+- Web wrappers import React Native members by name. `babel-plugin-react-native-web` rewrites named imports to each component's own RNW module. A namespace, default, or `require` import loads RNW's root index, which the Metro web resolver redirects back to the wrappers while that index is still initializing.
 - Web wrappers map `className` to RNW CSS style markers through `toRNWClassName`.
 - Web wrappers pass generated `dataSet` so data attribute variants can match.
-- `InputAccessoryView` wraps React Native Web's export when available (0.21.3+) and uses `View` with older React Native Web versions, while supporting Uniwind classes and data attributes.
+- `InputAccessoryView` wraps RNW's `View`, because RNW 0.21.3+ implements `InputAccessoryView` as an unimplemented `View` stub and older RNW versions do not export it. It supports Uniwind classes and data attributes.
 
 `withUniwind`:
 

@@ -1,14 +1,15 @@
 import type { InputAccessoryViewProps } from 'react-native'
-import * as ReactNative from 'react-native'
+import { View as RNView } from 'react-native'
 import { copyComponentProperties } from '../utils'
 import { generateDataSet } from './generateDataSet'
 import { toRNWClassName } from './rnw'
 
-const RNInputAccessoryView = ReactNative.InputAccessoryView ?? ReactNative.View
-
-export const InputAccessoryView = copyComponentProperties(RNInputAccessoryView, (props: InputAccessoryViewProps) => {
+// React Native Web implements InputAccessoryView (0.21.3+) as an unimplemented View stub, so this wraps View directly.
+// Reading InputAccessoryView from the react-native root would load React Native Web's root index, which the Metro web
+// resolver redirects back to this module while that index is still initializing.
+export const InputAccessoryView = copyComponentProperties(RNView, (props: InputAccessoryViewProps) => {
     return (
-        <RNInputAccessoryView
+        <RNView
             {...props}
             style={[toRNWClassName(props.className), props.style]}
             dataSet={generateDataSet(props)}
