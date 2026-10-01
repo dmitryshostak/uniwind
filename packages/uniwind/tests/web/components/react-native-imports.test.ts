@@ -12,8 +12,8 @@ describe('Web wrappers import React Native members by name', () => {
     test.each(wrappers)('%s', file => {
         const source = readFileSync(join(webComponentsDir, file), 'utf8')
 
-        expect(source).not.toMatch(/import\s+\*\s+as\s+\w+\s+from\s+['"]react-native['"]/)
-        expect(source).not.toMatch(/import\s+\w+\s*(,\s*\{[^}]*\})?\s+from\s+['"]react-native['"]/)
+        expect(source).not.toMatch(/import\s+(\w+\s*,\s*)?\*\s+as\s+\w+\s+from\s+['"]react-native['"]/)
+        expect(source).not.toMatch(/import\s+\w+\s*(,\s*(\{[^}]*\}|\*\s+as\s+\w+))?\s+from\s+['"]react-native['"]/)
         expect(source).not.toMatch(/require\(\s*['"]react-native['"]\s*\)/)
     })
 })
