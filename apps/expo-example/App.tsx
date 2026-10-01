@@ -1,5 +1,9 @@
 import './global.css'
+// Loads the react-native root on web, as expo-router does. With react-native-web 0.21.3 the app crashes on startup.
+import * as ReactNative from 'react-native'
 import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native'
+
+console.log('platform', ReactNative.Platform.OS)
 
 const TailwindTestPage = () => {
     return (
